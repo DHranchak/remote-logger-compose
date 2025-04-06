@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: remote-logger-db
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    volumes:
+      - ./pgdata/pgdata-local:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - elk-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${DB_USERNAME}", "-d", "${DB_DATABASE}"]
+      interval: 10s
+      retries: 5
+      timeout: 5s
+      start_period: 10s
+
+  nextjs-app:
+    image: public.ecr.aws/n0g5f2l6/debug/remote-logger:latest
+    container_name: nextjs-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: "postgresql://${DB_USERNAME}:${DB_PASSWORD}@db:${DB_PORT}/${DB_DATABASE}?schema=public"
+      NODE_ENV: production
+    networks:
+      - elk-network
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+networks:
+  elk-network:
+    driver: bridge

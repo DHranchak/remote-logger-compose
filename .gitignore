@@ -1,0 +1,11 @@
+# Visual Studio
+.vs
+
+#Cache
+node_modules
+
+# Database data
+pgdata
+
+# Env file
+.env
