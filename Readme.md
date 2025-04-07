@@ -12,6 +12,28 @@ A lightweight client-side logging service that collects logs from React Native a
 
 ---
 
+## 🔧 Installation
+
+
+### Installation Process
+
+1. Create a `.env` file with the environment variables. For example:
+
+```bash
+DB_USERNAME=postgres
+DB_PASSWORD=123456
+DB_DATABASE=database
+DB_PORT=5432
+```
+2. Place the `.env` file and the `docker-compose.yml` file in the same directory.
+3. Run the following command to start the services using Docker Compose:
+
+```bash
+docker-compose up
+```
+
+This will set up the necessary environment for your application to connect to the database and run smoothly.
+
 ## 🔧 Usage
 
 ### Initialize the Logger
