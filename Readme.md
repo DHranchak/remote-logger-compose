@@ -2,15 +2,7 @@
 
 A lightweight client-side logging service that collects logs from React Native apps and sends them to a remote backend for debugging, monitoring, and analytics.
 
-## Features
-
-- Logs with various severity levels (`TRACE`, `DEBUG`, `INFO`, etc.)
-- Automatically includes device info and OS version
-- Batches and sends logs to a remote server
-- Uses `react-native-device-info` for device metadata
-
-
----
+<br/><br/>
 
 ## 🔧 Installation
 
@@ -34,6 +26,8 @@ docker-compose up
 
 This will set up the necessary environment for your application to connect to the database and run smoothly.
 
+<br/><br/>
+
 ## 🔧 Usage
 
 ### Initialize the Logger
@@ -53,8 +47,7 @@ RemoteLogger.error('Unexpected exception', errorObject);
 RemoteLogger.ok('Heartbeat - App is healthy');
 ```
 
----
-
+<br/><br/>
 ## 🛰️ API Endpoint
 
 All logs are sent to the following endpoint:
@@ -91,7 +84,6 @@ POST https://<REMOTE_LOGGER_BACKEND_ADDRESS>/api/log
 | os              | string | OS name and version                  |
 | uuid            | string | Unique device identifier             |
 
----
 
 ## 🧾 Available Log Levels
 
